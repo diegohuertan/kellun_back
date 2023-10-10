@@ -9,6 +9,8 @@ router.get('/filtrardeportista', deportistaController.filterByrut_deportista)
 router.post('/crearDeportista', deportistaController.createDeportista);
 router.get('/usuarios', usersController.getAllusuarios );
 router.post('/validarsesion', usersController.validarUser);
+router.post('/crearUsuario', usersController.createUser);
+
 
 
 
