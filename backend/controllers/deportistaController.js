@@ -63,7 +63,7 @@ exports.filterByrut_deportista = (req, res) => {
     // Obtén el JSON enviado en el cuerpo de la solicitud
      const {
         rut_deportista
-        } = req.body;;
+        } = req.body;
 
     
     Deportista.filterByrut(rut_deportista, (err, result) => {
