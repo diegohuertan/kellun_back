@@ -46,12 +46,13 @@ class Deportista {
         });
     }
 
-    static filterBy(deportista,callback){
+    static filterByrut(rut_deportista,callback){
         
-        connection.query('SELECT * FROM deportista where rut_deportista = ?', [deportista.rut_deportista], (err, rows) => {
+        connection.query('SELECT * FROM deportista where rut_deportista = ?', [rut_deportista], 
+        (err, rows) => {
             if (err) {
                 console.error(err.message);
-                callback(err);
+                callback(err, null);
             }
             else{
                 callback(null, rows);
@@ -59,6 +60,60 @@ class Deportista {
             
         });
     }
+
+    static filterByName(deportista_first_nombre,deportista_second_nombre,deportista_first_apellido,deportista_second_apellido,callback){
+        
+        connection.query('SELECT * FROM deportista where deportista_first_nombre = ? and deportista_second_nombre = ? and deportista_first_apellido = ? and deportista_second_apellido = ?',
+         [deportista_first_nombre,
+          deportista_second_nombre,
+          deportista_first_apellido,
+          deportista_second_apellido], 
+         
+        (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                callback(err, null);
+            }
+            else{
+                callback(null, rows);
+            }
+            
+        });
+    }
+
+    static filterByCategoria(categoria,callback){
+        
+        connection.query('SELECT * FROM deportista where categoria = ? ',
+         [categoria], 
+         
+        (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                callback(err, null);
+            }
+            else{
+                callback(null, rows);
+            }
+            
+        });
+    }
+
+    static filterByOrigen(club_origen,callback){
+        
+        connection.query('SELECT * FROM deportista where club_origen = ?', [club_origen], 
+        (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                callback(err, null);
+            }
+            else{
+                callback(null, rows);
+            }
+            
+        });
+    }
+
+
 
     static create(deportista, callback) {
         connection.query('INSERT INTO deportista (rut_deportista, email, telefono, direccion_comuna, direccion_numero, direccion_calle, club_origen, deportista_first_nombre, deportista_second_nombre, deportista_first_apellido, deportista_second_apellido, img, categoria, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',

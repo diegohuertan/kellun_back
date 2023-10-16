@@ -61,26 +61,78 @@ exports.createDeportista = (req, res) => {
 
 exports.filterByrut_deportista = (req, res) => {
     // Obtén el JSON enviado en el cuerpo de la solicitud
-    const { rut_deportista } = req.query;
+     const {
+        rut_deportista
+        } = req.body;;
 
-    // Verifica si el JSON contiene el campo 'rut_deportista'
-    if (!rut_deportista) {
-        res.status(400).json({ error: 'El campo rut_deportista es requerido.' });
-        return;
-    }
-
-    // Puedes usar 'rut_deportista' en tu consulta o pasar el JSON completo a tu función 'filterBy'
-    const rut = { rut_deportista };
     
-    Deportista.filterBy(rut, (err, result) => {
+    Deportista.filterByrut(rut_deportista, (err, result) => {
         if (err) {
             console.error(err.message);
-            res.status(500).json({ error: 'Error en el servidor.' });
+            res.status(500).send( 'Error en el servidor.');
         } else {
             res.status(200).json(result);
         }
     });
 }
+
+exports.filterByClub_origen = (req, res) => {
+    // Obtén el JSON enviado en el cuerpo de la solicitud
+     const {
+        club_origen
+        } = req.body;
+
+    
+    Deportista.filterByOrigen(club_origen, (err, result) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send( 'Error en el servidor.');
+        } else {
+            res.status(200).json(result);
+        }
+    });
+}
+
+
+exports.filterByName = (req, res) => {
+    // Obtener los datos del cuerpo de la solicitud
+    const {
+        deportista_first_nombre,
+        deportista_second_nombre,
+        deportista_first_apellido,
+        deportista_second_apellido
+        } = req.body;
+
+
+    Deportista.filterByName(deportista_first_nombre,
+        deportista_second_nombre,
+        deportista_first_apellido,
+        deportista_second_apellido, (err, result) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Error en el servidor');
+        } else {
+            res.status(200).json(result);
+        }
+    });
+};
+
+exports.filterBydeportista_categoria = (req, res) => {
+    // Obtener los datos del cuerpo de la solicitud
+    const {
+        categoria
+        } = req.body;
+
+
+    Deportista.filterByCategoria(categoria, (err, result) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Error en el servidor');
+        } else {
+            res.status(200).json(result);
+        }
+    });
+};
 
 exports.deleterecetaByid = (req, res) => {
     const { rut_deportista } = req.params;
