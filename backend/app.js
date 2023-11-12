@@ -7,7 +7,7 @@ const port =  3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
-    origin: 'http://127.0.0.1:3003',
+    origin: 'http://localhost:3001',
 }));
 
 // Configura las rutas de la API
