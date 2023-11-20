@@ -31,20 +31,18 @@ exports.createUser = (req, res) => {
 
 exports.validarUser = (req, res) => {
     // Obtener los datos del cuerpo de la solicitud
-    const { correo, contraseña, perfil  } = req.body;
+    const {correo, contraseña  } = req.body;
 
-    // Crear un nuevo objeto Contact con los datos
-    const newUser = new Usuario(correo, contraseña, perfil);
 
     // Llamar al método estático "create" del modelo users
-    Usuario.validar(newUser, (err, usuarioValidado) => {
+    Usuario.validar(correo, contraseña, (err, result) => {
         if (err) {
             console.error(err.message);
             res.status(500).send('Error en el servidor');
         } else {
-            if (usuarioValidado) {
-                res.status(200).json({ success: true, message: 'Inicio de sesión exitoso' , Usuario: newUser });
-                
+            if (result && result.success) {
+                res.status(200).json({ success: true, message: 'Inicio de sesión exitoso token creado', token: result.token });
+                console.log(result)
             } else {
                 res.status(401).json({ message: 'Credenciales inválidas' });
             }
