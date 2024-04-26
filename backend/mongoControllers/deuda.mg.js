@@ -1,0 +1,1 @@
+const {Deuda} = require('../mongoModels/mongomodel');

@@ -1,0 +1,1 @@
+const {Deportista} = require('../mongoModels/mongomodel');

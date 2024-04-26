@@ -1,0 +1,1 @@
+const socio = require('../mongoModels/mongomodel');
